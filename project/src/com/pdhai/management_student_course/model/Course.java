@@ -1,16 +1,16 @@
 package com.pdhai.management_student_course.model;
 
 public class Course {
-    private String courseId;
-    private String courseName;
-    private int credits;// so tin chi
+    protected String courseId;
+    protected String courseName;
+    protected int credits;// so tin chi
 
     public Course(String id, String cName, int c) {
         this.courseId = id;
         this.courseName = cName;
         this.credits = c;
     }
-
+    //-------------------------------------------
     public String getCourseId() {
         return courseId;
     }
@@ -30,4 +30,11 @@ public class Course {
     public void setCredits(int c) {
         credits = c;
     }
+    //--------------------------------------------
+
+    public void displayInfo() {
+        System.out.println("Course ID: " + courseId + ", Name: " + courseName + "Creadits: " + credits);
+    }
+
+
 }
