@@ -11,6 +11,6 @@ public class OfflineCourse extends Course{
     @Override
     public void displayInfo() {
         super.displayInfo();
-        System.out.println("Platform: " + location);
+        System.out.println("Location: " + location);
     }
 }

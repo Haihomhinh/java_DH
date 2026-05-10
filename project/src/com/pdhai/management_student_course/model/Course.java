@@ -33,7 +33,7 @@ public class Course {
     //--------------------------------------------
 
     public void displayInfo() {
-        System.out.println("Course ID: " + courseId + ", Name: " + courseName + "Creadits: " + credits);
+        System.out.println("Course ID: " + courseId + ", Name: " + courseName + ", Creadits: " + credits);
     }
 
 
