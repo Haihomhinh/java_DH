@@ -13,4 +13,10 @@ public class OnlineCourse extends Course{
         super.displayInfo();
         System.out.println("Platform: " + platform);
     }
+
+    @Override
+    public void printDetails() {
+        super.printDetails();
+        System.out.println("Platform: " + platform);
+    }
 }

@@ -1,6 +1,6 @@
 package com.pdhai.management_student_course.model;
 
-public class Student {
+public class Student implements Printable{
     private String studentId;
     private String name;
     private String email;
@@ -42,5 +42,8 @@ public class Student {
         System.out.println("ID: " + studentId + ", Name: " + name + ", Email: " + email);
     }
 
-    //-----------------------------------------
+    @Override
+    public void printDetails() {
+        displayInfo();
+    }
 }

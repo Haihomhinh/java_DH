@@ -13,4 +13,10 @@ public class OfflineCourse extends Course{
         super.displayInfo();
         System.out.println("Location: " + location);
     }
+
+    @Override
+    public void printDetails() {
+        super.printDetails();
+        System.out.println("Location: "+ location);
+    }
 }

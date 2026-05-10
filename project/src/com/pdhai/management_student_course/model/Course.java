@@ -1,6 +1,6 @@
 package com.pdhai.management_student_course.model;
 
-public class Course {
+public abstract class Course implements Printable{
     protected String courseId;
     protected String courseName;
     protected int credits;// so tin chi
@@ -36,5 +36,9 @@ public class Course {
         System.out.println("Course ID: " + courseId + ", Name: " + courseName + ", Creadits: " + credits);
     }
 
+    @Override
+    public void printDetails() {
+        displayInfo();
+    }
 
 }
