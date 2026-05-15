@@ -53,8 +53,10 @@ public class Student implements Printable{
 
     public void enrollCourse(Course course) {
         if (course == null) {
+            System.out.println("Invalid input!");
             return;
         }
+
         enrolledCourses.add(course);
     }
     
@@ -73,6 +75,7 @@ public class Student implements Printable{
         for (Course c : enrolledCourses) {
             if (c.getCourseId().equalsIgnoreCase(id)) {
                 enrolledCourses.remove(c);
+                break;
             }
         }
     }

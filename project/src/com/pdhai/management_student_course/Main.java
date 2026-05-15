@@ -2,17 +2,16 @@ package com.pdhai.management_student_course;
 
 import java.util.Scanner;
 import java.util.Map;
-import java.util.HashMap;
 
 import com.pdhai.management_student_course.Util.InputHelper;
 import com.pdhai.management_student_course.model.*;
+import com.pdhai.management_student_course.Data.*;
 
 public class Main {
     static Scanner input = new Scanner(System.in);
+    static DataManager data = new DataManager();
 
     public static void main(String[] args) {
-        Map<String, Course> courses = new HashMap<>();// <id, course>
-        Map<String, Student> students = new HashMap<>(); // <id, student>
         int choice;
 
         do {
@@ -28,11 +27,11 @@ public class Main {
                     break;
                 case 1:
                     System.out.println("\n--- STUDENT MANAGEMENT ---");
-                    managerStudent(students);
+                    managerStudent();
                     break;
                 case 2:
                     System.out.println("\n--- COURSE MANAGEMENT ---");
-                    managerCourses(courses);
+                    managerCourses();
                     break;
                 default:
                     System.out.println("Invalid choice!");
@@ -42,7 +41,7 @@ public class Main {
         input.close();
     }
 
-    public static void managerStudent(Map<String, Student> students) {
+    public static void managerStudent() {
 
         int choice;
         do {
@@ -65,14 +64,19 @@ public class Main {
                     String name = input.nextLine();
                     System.out.print("Enter student email: ");
                     String email = input.nextLine();
-                    students.put(id, new Student(id, name, email));
+
+                    data.addStudent(new Student(id, name, email));
+                    System.out.println("Add student successfully!");
+
                     break;
 
                 case 2:
                     System.out.println("\n---------LIST OF STUDENTS------------");
+
+                    Map<String, Student> students = data.getListStudents();
                     if (!students.isEmpty()) {
-                        for (Map.Entry<String, Student> s : students.entrySet()) {
-                                s.getValue().displayInfo();
+                        for (Student s : students.values()) {
+                                s.displayInfo();
                         }
                     } else
                         System.out.println("NULL");
@@ -83,7 +87,8 @@ public class Main {
                 case 3: 
                     System.out.print("Enter the student id that you want to find: ");
                     String studentId = input.nextLine();
-                    Student s = findStudentEqualById(students, studentId);
+
+                    Student s = data.findStudentById(studentId);
                     printFollowID(s); // downcasting student to printable
                     break;
 
@@ -94,7 +99,7 @@ public class Main {
         } while (choice != 0);
     }
 
-    public static void managerCourses(Map<String, Course> courses) {
+    public static void managerCourses() {
         int choice;
         do {
             System.out.println("0. Back to Main Menu"); // Đánh số 3 rõ ràng
@@ -124,16 +129,22 @@ public class Main {
                     if (type == 1) {
                         System.out.print("Enter platform: ");
                         String platform = input.nextLine();
-                        courses.put(id, new OnlineCourse(id, name, credits, platform));
+                        data.addCourse(new OnlineCourse(id, name, credits, platform));
+                        System.out.println("Add course successfully!");
+
                     } else {
                         System.out.print("Enter location: ");
                         String location = input.nextLine();
-                        courses.put(id, new OfflineCourse(id, name, credits, location));
+                        data.addCourse(new OfflineCourse(id, name, credits, location));
+                        System.out.println("Add course successfully!");
+
                     }
                     break;
 
                 case 2:
                     System.out.println("\n--- LIST OF COURSES ---");
+
+                    Map<String, Course> courses = data.getListCourses();
                     if (courses.isEmpty()) {
                         System.out.println("List is empty!");
                     } else {
@@ -147,7 +158,7 @@ public class Main {
                 case 3:
                     System.out.print("Enter the id that you want to find: ");
                     String courseId = input.nextLine();
-                    Course c = findCourseEqualById(courses, courseId);
+                    Course c = data.findCourseById(courseId);
                     printFollowID(c);
                     break;
 
@@ -155,32 +166,6 @@ public class Main {
                     System.out.println("Invalid choice!");
             }
         } while (choice != 0); // Thoát khi chọn đúng số 0
-    }
-
-    public static Course findCourseEqualById(Map<String, Course> courses, String id) {
-        if (courses.isEmpty()) {
-            return null;
-        } else {
-            for (Map.Entry<String, Course> c : courses.entrySet()) {
-                if (c.getKey() == id) {
-                    return c.getValue();
-                }
-            }
-        }
-        return null;
-    }
-    
-    public static Student findStudentEqualById(Map<String, Student> students, String id) {
-        if (students.isEmpty()) {
-            return null;
-        } else {
-            for (Map.Entry<String, Student> s : students.entrySet()) {
-                if (s.getKey() == id) {
-                    return s.getValue();
-                }
-            }
-        }
-        return null;
     }
 
     public static void printFollowID(Printable p) {

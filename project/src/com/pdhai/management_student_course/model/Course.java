@@ -53,12 +53,7 @@ public abstract class Course implements Printable{
     }
 
     public void removeStudent(String id) {
-        for (Student s : students) {
-            if (s.getStudentId().equalsIgnoreCase(id)) {
-                students.remove(s);
-            }
-            return;
-        }
+        students.removeIf(s -> s.getStudentId().equalsIgnoreCase(id));
     }
 
     public void listStudent() {
