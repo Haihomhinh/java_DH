@@ -1,10 +1,15 @@
 package com.pdhai.management_student_course.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public abstract class Course implements Printable{
     protected String courseId;
     protected String courseName;
     protected int credits;// so tin chi
 
+    protected Set<Student> students = new HashSet<>();
+    
     public Course(String id, String cName, int c) {
         this.courseId = id;
         this.courseName = cName;
@@ -39,6 +44,27 @@ public abstract class Course implements Printable{
     @Override
     public void printDetails() {
         displayInfo();
+    }
+
+    public void addStudent(Student s) {
+        if (s != null) {
+            students.add(s);
+        }
+    }
+
+    public void removeStudent(String id) {
+        for (Student s : students) {
+            if (s.getStudentId().equalsIgnoreCase(id)) {
+                students.remove(s);
+            }
+            return;
+        }
+    }
+
+    public void listStudent() {
+        for (Student s : students) {
+            s.displayInfo();
+        }
     }
 
 }
